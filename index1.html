@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terima Kasih 💖</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ffe6f2, #e8e5ff);
+            overflow: hidden;
+        }
+
+        .card {
+            background: white;
+            width: 90%;
+            max-width: 380px;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            animation: muncul 0.8s ease;
+        }
+
+        h1 {
+            color: #d63384;
+            font-size: 26px;
+        }
+
+        p {
+            color: #444;
+            line-height: 1.7;
+        }
+
+        button {
+            border: none;
+            padding: 13px 25px;
+            border-radius: 12px;
+            font-size: 16px;
+            background: #ec5aa3;
+            color: white;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .heart {
+            position: fixed;
+            font-size: 20px;
+            animation: jatuh 4s linear forwards;
+        }
+
+        @keyframes muncul {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes jatuh {
+            from {
+                transform: translateY(-50px);
+                opacity: 1;
+            }
+
+            to {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <!-- HALAMAN PERTAMA -->
+    <div id="page1">
+
+        <h1>Makasih yaa 🥺💖</h1>
+
+        <p>
+            <span id="nama"></span>,<br>
+            makasih udah mau maafin aku ❤️
+        </p>
+
+        <button onclick="lanjut()">
+            Lanjut 💖
+        </button>
+
+    </div>
+
+
+    <!-- HALAMAN KEDUA -->
+    <div id="page2" class="hidden">
+
+        <h1>Hehe akhirnya 🥺💗</h1>
+
+        <p>
+            Aku janji bakal lebih hati-hati
+            dan gak bikin kamu kesel lagi.
+            <br><br>
+            Sekali lagi, makasih ya ❤️
+        </p>
+
+        <button onclick="selesai()">
+            ❤️
+        </button>
+
+    </div>
+
+
+    <!-- HALAMAN TERAKHIR -->
+    <div id="page3" class="hidden">
+
+        <h1>💖</h1>
+
+        <p>
+            Semoga kita tetap baik-baik aja yaa 🥺
+            <br><br>
+            Makasih udah baca sampai akhir.
+        </p>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    // Ambil nama dari URL jika ada
+    const params = new URLSearchParams(window.location.search);
+    const nama = params.get("nama");
+
+    document.getElementById("nama").textContent =
+        nama ? nama : "Kamu";
+
+
+    function lanjut() {
+
+        document.getElementById("page1")
+            .classList.add("hidden");
+
+        document.getElementById("page2")
+            .classList.remove("hidden");
+
+        buatHati();
+
+    }
+
+
+    function selesai() {
+
+        document.getElementById("page2")
+            .classList.add("hidden");
+
+        document.getElementById("page3")
+            .classList.remove("hidden");
+
+        for (let i = 0; i < 15; i++) {
+            setTimeout(buatHati, i * 150);
+        }
+
+    }
+
+
+    function buatHati() {
+
+        const heart = document.createElement("div");
+
+        heart.className = "heart";
+        heart.textContent = "❤️";
+
+        heart.style.left =
+            Math.random() * 100 + "vw";
+
+        heart.style.top = "-30px";
+
+        heart.style.fontSize =
+            (15 + Math.random() * 20) + "px";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 4000);
+
+    }
+
+</script>
+
+</body>
+</html>
